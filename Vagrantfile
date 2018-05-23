@@ -18,5 +18,5 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "docker", primary: true do |h|
     h.vm.network "private_network", ip: "192.168.136.10"
-
+  end
 end
