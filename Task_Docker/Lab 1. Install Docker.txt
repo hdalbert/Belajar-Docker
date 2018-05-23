@@ -1,0 +1,41 @@
+Lab 1. Install Docker
+
+- Referensi Link
+	- https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+	- get.docker.com
+
+- create user & group docker
+- assign user & group docker sebagai sudo
+	- Note: dalam lab ini menggunakan vagrant dengan user vagrant, maka dari itu assign group docker ke user vagrant
+
+	- # sudo usermod -aG docker vagrant
+	Note: jika masih menggunakan sudo tambahkan comamnd berikut
+	- # newgrp docker
+
+- install docker-machine
+	- https://docs.docker.com/machine/install-machine/#install-machine-directly
+
+	- check docker-machine version
+		- # docker-machine version
+
+- install docker compose
+	- https://github.com/docker/compose/releases
+	- copy = link yg diberikan (curl - L *)
+
+	Note: jika ada error pada saat chmod -x dikarenakan user group vagrant tidak masuk dalam sudo, untuk itu masuk dalam user root
+
+	- sudo -i 
+	- dan install kembali
+	- check docker-compose version
+		- # docker-compose version
+
+- kita juga dapat install docker machine pada repo berikut
+	- https://github.com/docker/machine/releases
+
+- install GIT
+	- # sudo apt-get install git
+
+- clone repo materi docker
+	- # mkdir code && cd code
+	- # git clone https://github.com/BretFisher/udemy-docker-mastery.git
