@@ -1,0 +1,61 @@
+Lab 3. Starting a Nginx Web Server
+
+- Materi ini membahas :
+	1. images vs container
+	2. run/stop/remove containers
+	3. check container logs and processes
+
+
+Task :
+	1. images vs container
+		- image adalah binaries and libraries and source code yang membagun aplikasi 
+		- container adalah sebuah instance dari image yang runnind sebagai sebuah process
+		
+		- kita dapat menjalankan banyak container hanya dengan image yang sama
+		- dalam materi ini kita akan menggunakan image nginx webserver
+		- Docker default image "registry" dipull dari docker hub (hub.docker.com).
+
+
+	2. run/stop/remove containers
+		- $ docker container run --publish 80:80 nginx:latest
+
+		- action dari command diatas
+			- Download images nginx from docker hub
+			- started a new container dari image
+			- Opened port 80 on the host IP
+			- Routes that traffic to the container IP, port 80
+
+		Note: bila terjadi error kemunkinan port 80 sudah digunakan oleh container lain, solusinya ubah port.
+
+		- container yang berjalan masih pada forground, dan kita tidak selalu mengginkan menjalankannya pada forground
+			- untuk keluar forground process (ctrl+c), ketika keluar container otomatis shutdown
+			- agar container tetap running tanpa tampil pada forground tambahkan command --detach
+
+			- $ docker container run --publish 80:80 --detach nginx
+
+
+	3. check container logs and processes
+		- list runnings container
+		 	- $ docker container ls
+		 	- $ docker ps (old way)
+
+
+		- shutdown container
+			- $ docker container stop [container-id]
+
+		- Running container dengan specify name
+			- $ docker container run --publish 80:80 --detach --name webhost nginx
+
+		- show logs specify container
+			- $ docker container logs webhost
+
+		- show process specify running container
+			- $ docker container top webhost
+
+		- menhapus multiple container
+			- $ docker container rm 231 595 e7e 18c
+
+			note: saat menggunakan rm dan terjadi error saat menghapus, itu dikarenakan container running, solusinya tamhkan -f
+			- $ docker container rm -f 231 
+
+  

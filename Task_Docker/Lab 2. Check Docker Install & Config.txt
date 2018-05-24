@@ -1,3 +1,33 @@
 Lab 2. Check Docker Install & Config
 
-- 
+- Create & menggunakan container
+
+Task
+	1 check version docker cli dan engine yang terinstall
+	2 mempelajari management command container
+	3 Mempelajari basic networking docker
+
+Requirement :
+	- docker yang terinstall latest version
+	- saat ini saya menggunakan docker Version: 18.03.1-ce
+
+1. Check docker version
+	- # docker version
+		- verifikasi cli dapat berkomunikasi dengan engine
+
+	- # docker info
+		- menampilkan values configuration untuk engine
+		- misal ada berapa container yg running atau down, total image yg dimiliki, dll.
+
+	- # docker (enter)
+		- kita juga bisa melihat perintah apa saja yg ada sesudah command docker
+
+	- Docker command line structure
+
+		Docker COMMAND Format
+			new "managment commands" format:
+				docker <command> <sub-command> (options)
+				eg : docker container run
+
+			old way (still works): docker <command> (options)
+				eg : docker run 
