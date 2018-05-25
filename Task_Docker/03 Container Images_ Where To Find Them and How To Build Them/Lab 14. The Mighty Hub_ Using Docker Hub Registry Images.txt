@@ -1,0 +1,5 @@
+Lab 14. The Mighty Hub_ Using Docker Hub Registry Images
+
+- Docker Hub, "the apt package system for containers"
+- Official images and how to use them
+- How to discern "good" public images

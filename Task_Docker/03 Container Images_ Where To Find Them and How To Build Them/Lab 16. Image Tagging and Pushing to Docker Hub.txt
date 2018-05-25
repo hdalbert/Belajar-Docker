@@ -1,0 +1,40 @@
+Lab 16. Image Tagging and Pushing to Docker Hub
+
+Image Tagging and Push sending to docker hub
+
+This lecture : Requirements
+- know what container and image are
+- Understand image layer basics
+- Understand Docker Hub basics
+
+This Lecture
+- All about image tags
+- How to upload to Docker Hub
+- Image ID's vs Tag
+
+Lab :
+- docker image tag
+	- assign one or more tags to an image
+	- docker tag (old way)
+
+
+- $ docker pull mysql/mysql-server
+	- nge pull image dari repo sendiri di docker hub
+
+Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+	- docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+
+	- $ docker image tag nginx:latest ichank:nginx
+
+	- $ docker image tag nginx:latest ichank:nginx
+	- $ docker image tag nginx:latest nginx/ichank:testing
+
+Login ke dalam docker hub
+	- $ docker login -u USERNAME -p PASSWORD
+
+Push Image to Docker Hub
+	- $ docker push ichank/nginx
+	note : saat push image ke dalam repo docker hub, penamaan image dan tag harus sesuai dengan repo yg sebelumnya dibuat
+		- e.g. create repo dengan nama ichank/nginx
+		- maka nama image ichank dengan tag nginx
+
