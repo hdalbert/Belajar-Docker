@@ -1,0 +1,50 @@
+Lab 8. Docker Networks_ Concepts for Private and Public Comms in Containers
+
+- Docker Networks - Private & Public Comms for Containers
+
+
+Docker Networks : Concepts
+
+- Review of docker container run -p
+- For local dev/testing, networks usually "just work"
+- Quick port check with docker container port <container>
+- Learn concept of Docker Networking
+- Understand how networks packets move around Docker
+
+
+Docker Networks Defaults
+
+- Each container connected to a private virtual networks "bridge"
+- Each virtual network routes through NAT firewall on host IP
+- All container on a virtual network can talk to each other without -p
+- Best practice is to create a new virtual network for each app:
+	- network "my_web_app" for mysql and php/apache containers
+	- network "my_api" for mongo and nodejs containers
+
+
+Docker Networks Cont.
+
+- "Batteries Included, But Removable"
+	- Defaults work well in many cases, but easy to swap out parts to customize it
+
+- Make new virtual networks
+- attach container two more then one virtual networks (or none)
+- skip virtual networks and use host IP (--net=host)
+- use different Docker Network driver to gain new abilities
+- and much more...
+
+Lab :
+- $ docker container run -p 80:80 --name webhost -d nginx
+	- -p (--publish) = Remember publishing port is always in HOST:CONTAINER format
+
+Verifikasi port :
+	- $ docker container port webhost   
+
+Verifikasi IP address :
+	- $ docker container inspect --format '{{ .NetworkSettings.IPAddress }}' webhost
+		- --format = A common option for formatting the output the commands using "GO templates"
+
+
+Referensi:
+
+https://docs.docker.com/config/containers/container-networking/#ip-address-and-hostname

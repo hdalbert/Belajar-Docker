@@ -1,0 +1,32 @@
+Lab 7. Getting a shell inside continaers
+
+- docker container run -it - start new container interactively\
+	- -t = pseudo tty
+		- simulates a real terminal, like what SSH does
+	- -i = interactive
+		- keep session open to receive terminal input
+
+- docker container run exec -it - run additional command in existing container
+- different linux distros in containers   
+
+
+Lab :
+	- $ docker container run -it --name proxy nginx bash
+		- jika run dengan -it, maka anda akan masuk ke dalam terminal container 
+		- jika anda keluar dari terminal container maka container auto stop
+
+	- $ docker container run -it --name ubuntu ubuntu
+		- ubuntu image = default CMD adalah bash, jadi tidak perlu specify
+
+- bila kita ingin menjalankan kembali existing container dengan masuk ke dalam bash berikut perintah nya:
+	- $ docker container start -ai ubuntu
+		- -a = attach
+		- -i = interactive
+
+- Bila kita ingin masuk ke terimal bash pada container yg sudah running berikut perintahnya :
+	- $ docker container exec -it [name container] bash
+		note : saat keluar pada mode terminal bash, container tetap running
+
+- Alpine Linux = A small security - focussed distribution
+	- $ docker pull alpine
+		- pembahasan alpine akan dijelaskan pada lab berikutnya

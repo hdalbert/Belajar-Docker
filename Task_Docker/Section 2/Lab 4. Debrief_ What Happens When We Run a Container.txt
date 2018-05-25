@@ -1,0 +1,18 @@
+Lab 4. Debrief_ What Happens When We Run a Container
+
+- Apa yang ada dalam "docker container run --publish 80:80 --detach nginx:latest nginx -T"
+
+	- mencari image di local image cache, bila tidak ditemukan
+
+	- mencari image di repository (default to docker hub)
+	
+	- dan mendownload latest version
+		- note: bila tidak mendefinisikan version, maka by default latest version yang dipilih
+	
+	- Create new container based on that images & prepare to start
+
+	- diberikan sebuah virtual IP Private di dalam docker engine
+
+	- open up port 80 pd host dan diforward ke port 80 kedalam container 
+
+	- start container menggunakan CMD dalam image Dockerfile

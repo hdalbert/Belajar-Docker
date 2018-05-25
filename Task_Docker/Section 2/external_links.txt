@@ -1,0 +1,6 @@
+- b'Docker-Internals-cgroups-namespaces-and-beyond-YouTube-'
+- b'https://youtu.be/sK5i-N34im8?list=PLBmVKD7o3L8v7Kl_XXh3KaJl9Qw2lyuFl'
+- b'Dockers-format-option-for-filtering-cli-output'
+- b'https://docs.docker.com/engine/admin/formatting/'
+- b'Package-Management-Basics-apt-yum-dnf-pkg'
+- b'https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg'

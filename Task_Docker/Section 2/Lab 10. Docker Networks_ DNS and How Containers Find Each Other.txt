@@ -1,0 +1,70 @@
+Lab 10. Docker Networks_ DNS and How Containers Find Each Other
+
+Docker Network : DNS - How container find each other
+
+we can learn :
+- Understand how DNS is the key to easy inter-container comms
+- See how this works by default with custom networks
+- Learn how to use --link to enable DNS on defult bridge network
+
+
+- Forget IP's
+	- Static IP's and using IP's for talking to containers is an anti-patern. Do your best to avoid it.
+
+- Docker DNS
+	- Docker DNS has a built-in DNS server that container use by default.
+
+- DNS Default Name
+	- Docker default the hostname to the container's name, but you can also aliases
+
+
+Lab :
+- create container baru
+	- $ docker container run -d --name my_nginx --network my_app_net nginx
+
+- Verify :
+	- $ docker network inspect my_app_net
+
+		SKIP
+		"Containers": {
+            "1c2b058e985b1bd0ea3791820f4cc10be4b6676eebc911a9903d09c538ae102e": {
+                "Name": "my_nginx",
+                "EndpointID": "040e4eb0b11c87f7e9750439d74b5eb554f702adfb38a374d92bf3c697acfa57",
+                "MacAddress": "02:42:ac:13:00:03",
+                "IPv4Address": "172.19.0.3/16",
+                "IPv6Address": ""
+            },
+            "e450ecee3f4a4497f8cb95a406cf98713c86b0214db2007655c30c304ef03fd3": {
+                "Name": "new_nginx",
+                "EndpointID": "623221f41a6ea9beeaf79f9172ccb54a600219e0d6d0c35af07f580398129be5",
+                "MacAddress": "02:42:ac:13:00:02",
+                "IPv4Address": "172.19.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+
+- Test Ping antar container dari my_nginx ke new_nginx
+	- $ docker container exec -ti my_nginx ping new_nginx 
+
+	- Bila muncul error
+		OCI runtime exec failed: exec failed: container_linux.go:348: starting container process caused "exec: \"ping\": executable file not found in $PATH": unknown
+
+		- solusinya masuk ke bash container
+			- apt-update
+			- apt install iputils-ping
+
+
+
+Docker Networks : DNS
+
+- Containers shouldn't rely on IP's for inter-communication
+- DNS for friendly names is built-in if you use custom networks 
+- Your using custom network right
+- this gets way easier with docker compose in future section
+
+
+
+
+

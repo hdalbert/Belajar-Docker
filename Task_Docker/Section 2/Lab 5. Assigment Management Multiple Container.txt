@@ -1,0 +1,40 @@
+Lab 5. Assigment Management Multiple Container
+
+- doc.docker.com and --help
+- Run nginx, mysql, httpd (apache) server
+- Run all of them --detach (or -d), name them with --name
+- nginx should listen on 80:80, httpd on 8080:80, mysql on 3306:3306
+- when running MYSQL, use the --env option (or -e) to pass in MYSQL_RANDOM_ROOT_PASSWORD=yes
+- use docker container logs on mysql to find the random password it created on startup
+- clean it all up with docker container stop and docker container rm (both can accept multiple name or ID's)
+- use docker container ls to ensure everything is correct before and after cleanup
+
+
+Lab :
+	
+Install MYSQL SERVER :
+	- docker container run -d -p 3306:3306 --name db -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+
+Check Password Mysql
+	- $ docker container logs db
+		- search GENERATED ROOT PASSWORD: paex6UezeeL6eequahW8niph7ula1ieF
+		- copy password untuk login ke dalam mysql
+
+Install httpd (apache) server :
+	- $ docker container run -d -p 8080:80 --name webserver httpd
+
+Install Nginx sebagai Proxy :
+	- $ docker container run -d --name proxy -p 80:80 nginx
+
+Verifikasi :
+	- $ curl localhost
+	- $ curl localhost:8080
+
+Shutdown container ;
+	- $ docker container stop db proxy webserver
+
+Menghapus container :
+	- $ docker container rm [TAB untuk melihat ID container]
+
+Melihat Image yang ada di local
+	- $ docker image ls

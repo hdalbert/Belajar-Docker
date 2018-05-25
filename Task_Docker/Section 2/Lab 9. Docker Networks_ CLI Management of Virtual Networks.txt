@@ -1,0 +1,105 @@
+Lab 9. Docker Networks_ CLI Management of Virtual Networks
+
+Docker Networks: CLI Management
+
+- show networks - docker network ls
+- inspect a network - docker network inspect
+- create a network - docker network create --driver
+- attach a network to container - docker network connect
+- detach a network from container - docker network disconnect
+
+pengertian docker network ls :
+    - bridge
+    - host
+    - none
+
+- --network host
+    - it gain performance by skipping virtual network but sacrifices security of container model
+
+- --network none
+    - removes eth0 and only leaves you with localhost interface in container
+
+- --network driver
+    - built-in 3rd party extension that give you virtual network feautres
+    
+
+$ docker network ls 
+	- menampilkan docker network yang telah dibuat
+	- --network bridge
+		- Default Docker virtual network, which is NAT'ed behind the Host IP.
+
+$ docker network inspect bridge
+	- melihat semua network yang ter attached pada container
+
+$ docker network create my_app_net
+	- membuat virtual network interface dengan nama my_app_net
+
+- membuat container dengan spesifik network
+	- $ docker container run -d --name new_nginx --network my_app_net nginx
+
+- Melihat container mana saja yang menggunakan network interface my_app_net
+	- $ docker network inspect my_app_net
+
+
+- docker network connect - assign container ke dalam network virtual interface yg telah kita buat
+	- Dynamically creates a NIC in a container on an existing virtual network
+
+	- $ docker network connect my_app_net webhost
+
+- check interface apa saja yang ada pada container webhost
+	- $ docker container inspect webhost
+		- Hasilnya sbb
+
+		            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "91498f5c5c1a2511e9155e0396e694c48002946e1b05cc43102440c625702dbf",
+                    "EndpointID": "cfb62a8b908002e3d2634fd2dd739449534fc993c0153dab23ef9f0ef834a546",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:02",
+                    "DriverOpts": null
+                },
+                "my_app_net": {
+                    "IPAMConfig": {},
+                    "Links": null,
+                    "Aliases": [
+                        "e9e7757b55af"
+                    ],
+                    "NetworkID": "aa2434dd90a26c733551cec41f011afa9220cd2b8e6c59c2e8eee239e3c9fd93",
+                    "EndpointID": "8743923e3c03ab48587cbe995579d4ca072117c12384a6f85ee41e3a53131f1d",
+                    "Gateway": "172.19.0.1",
+                    "IPAddress": "172.19.0.3",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:13:00:03",
+                    "DriverOpts": null
+
+
+        Note: terdapat 2 NIC pada container dan ip dhcp yg didapat adalah 172.17.02 & 172.19.0.3
+
+
+- Menghapus NIC virtual interface pada container
+	- $ docker network disconnect my_app_net webhost
+
+
+
+Docker Networks : Default Security
+- Create your apps so frontend/backend sit on same Docker Network
+- Their inter-communication never leaves host
+- All externally exposed ports closed by default
+- You musht manually expose via -p, which is better default security!
+- This gate even better later with swarm & Overlay Networks
+
+
+Referensi :
+
+https://docs.docker.com/config/containers/container-networking/#ip-address-and-hostname
